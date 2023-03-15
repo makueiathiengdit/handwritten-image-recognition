@@ -1,0 +1,8 @@
+
+<form method="post" enctype="multipart/form-data"> 
+    {%csrf_token%}
+    {{form.as_p}}
+     <label for='image_index' class="col-form-label">Enter image index </label>
+     <input type='text' name='image_index' id='image_index' >
+    <input type="submit" name="upload">
+</form>

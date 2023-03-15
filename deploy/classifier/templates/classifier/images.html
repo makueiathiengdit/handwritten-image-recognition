@@ -1,0 +1,7 @@
+{%if images %}<h4>there are {{images|length}} images </h4>{% endif %}
+{%for img in images%}
+<img src="{{img.img.url}}" alt="{{img}}"/>
+
+{%empty%}
+<h4>No images available</h4>
+{%endfor%}

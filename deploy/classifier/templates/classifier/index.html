@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handwritten Digit Recognizer </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+    <h1>Handwritten Digit Recognizer</h1>
+    <h4>Model status:
+        {% if model_status == 'available' %}
+         <span style="color: rgb(79, 150, 8);">{{model_status }}</span>
+         
+         {%else%} 
+         <span style="color: rgb(255, 30, 0);">{{model_status }}</span>
+         {% endif%}
+    </h4>
+  {%if request == 'POST'%}
+    {% comment %} <h3>Got post request</h3> {% endcomment %}
+    <p>you requested for image with index : {{img_id}} </p>
+    {%if prediction.error == None %}
+    <p>the predicted label is <span style="color: green;">{{predicted_label}} </span> </p>
+    {%else%}
+    <p>Error: <span style="color: rgb(255, 30, 0);"> {{prediction.error}} </span> </p>
+    {%endif%}
+   {%endif%}
+
+    {%if model_status == 'available'%}
+    {% comment %} <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">S/NO</th>
+            <th scope="col">Image</th>
+            <th scope="col">Class</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          {% for id, label in results.items %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{ id }}</td>
+                    <td>{{ label }} </td>
+               </tr>
+            {%empty%}
+               <span>No result</span>
+            {% endfor %}
+        </tbody>
+      </table> {% endcomment %}
+
+
+    {%endif%}
+    {% include "classifier/form.html" %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
